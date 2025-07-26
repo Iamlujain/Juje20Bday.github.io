@@ -15,7 +15,7 @@
             min-height: 200vh;
             background: linear-gradient(180deg, #2d0036 0%, #4b006e 100%);
         }
-        /* Starry night effect */
+    
         body::before {
             content: '';
             position: fixed;
@@ -90,7 +90,7 @@
     <button class="unwrap-btn" id="unwrapBtn">Unwrap Present</button>
     <div id="bottom-spacer" style="height: 600px;"></div>
     <script>
-        // Example image URLs (replace with your own if desired)
+      
         const imageUrls = [
             'https://i.ibb.co/1YGG8tWx/a9aeb686-3a27-4da5-b6ce-7b05453405e1.jpg', 
             'https://i.ibb.co/mr7g6JR5/6d82e073-9e37-4b16-9c58-d3be792db694.jpg', 
@@ -103,7 +103,7 @@
             'https://i.ibb.co/B5ztXCqV/IMG-7553.jpg'
         ];
 
-        // Shuffle images array (Fisher-Yates)
+       
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -128,10 +128,10 @@
                 top = y;
                 collision = false;
                 for (const obj of floatingImages) {
-                    // Use current animated position for better accuracy
+               
                     const otherLeft = parseFloat(obj.el.style.left);
                     const otherTop = obj.y;
-                    // Check bounding box overlap
+             
                     if (
                         left < otherLeft + imgSize * 0.95 &&
                         left + imgSize * 0.95 > otherLeft &&
@@ -151,13 +151,13 @@
             img.style.top = top + 'px';
             img.style.opacity = 1;
             document.body.appendChild(img);
-            const speed = randomBetween(0.7, 1.8); // slightly faster
+            const speed = randomBetween(0.7, 1.8);
             floatingImages.push({el: img, y: top, speed: speed});
         }
 
         function addInitialImages() {
             for (let i = 0; i < 10; i++) {
-                // Appear at random vertical positions in the visible window and below
+        
                 createFloatingImage(randomBetween(minY * 0.5, minY + window.innerHeight));
             }
         }
@@ -176,11 +176,11 @@
             requestAnimationFrame(animateImages);
         }
 
-        // Limit the total number of floating images
+      
         const MAX_FLOATING_IMAGES = 30;
         let imagesAddedOnScroll = false;
         function addImagesOnScroll() {
-            // Add more images as user scrolls down, but only once
+       
             const scrollY = window.scrollY;
             const windowH = window.innerHeight;
             if (
@@ -195,13 +195,13 @@
                 }
                 imagesAddedOnScroll = true;
             }
-            // Reset flag if user scrolls up
+     
             if (scrollY + windowH < document.body.scrollHeight - 400) {
                 imagesAddedOnScroll = false;
             }
         }
 
-        // Show the button when scrolled to bottom
+
         const unwrapBtn = document.getElementById('unwrapBtn');
         function checkShowButton() {
             const scrollY = window.scrollY;
@@ -229,7 +229,7 @@
             checkShowButton();
         });
         window.addEventListener('resize', () => {
-            // Optionally, adjust images on resize
+         
             checkShowButton();
         });
 
