@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 200vh;
+            background: linear-gradient(180deg, #2d0036 0%, #4b006e 100%);
+        }
+        /* Starry night effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(white 1px, transparent 1px) 20px 30px/120px 120px repeat,
+                radial-gradient(white 1.5px, transparent 1.5px) 80px 100px/200px 200px repeat,
+                radial-gradient(#fff8 0.8px, transparent 1px) 0 0/80px 80px repeat;
+            opacity: 0.7;
+        }
+        .fixed-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-family: 'Oswald', 'Comic Sans MS', cursive, sans-serif;
+            color: #fff;
+            text-shadow:
+                0 0 20px #fff,
+                0 0 40px #a259ff,
+                0 0 60px #a259ff,
+                0 0 80px #fff;
+            z-index: 1000;
+            user-select: none;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+        .floating-img {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transition: opacity 0.5s;
+            filter: drop-shadow(0 12px 32px #000a) drop-shadow(0 2px 12px #a259ffbb);
+        }
+    </style>
+    <style>
+        .unwrap-btn {
+            display: none;
+            position: fixed;
+            left: 50%;
+            bottom: 40px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #a259ff 0%, #6e00ff 100%);
+            color: #fff;
+            font-size: 1.7rem;
+            font-family: 'Oswald', 'Comic Sans MS', cursive, sans-serif;
+            padding: 18px 48px;
+            border: none;
+            border-radius: 40px;
+            box-shadow: 0 4px 32px #a259ff55, 0 2px 8px #0008;
+            cursor: pointer;
+            z-index: 2000;
+            letter-spacing: 0.08em;
+            text-shadow: 0 0 10px #fff, 0 0 20px #a259ff;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+        }
+        .unwrap-btn:hover {
+            background: linear-gradient(90deg, #fff 0%, #a259ff 100%);
+            color: #6e00ff;
+            box-shadow: 0 6px 40px #fff8, 0 2px 8px #a259ff88;
+            transform: translateX(-50%) scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-text">Happy Birthday</div>
+    <button class="unwrap-btn" id="unwrapBtn">Unwrap Present</button>
+    <div id="bottom-spacer" style="height: 600px;"></div>
+    <script>
+        // Example image URLs (replace with your own if desired)
+        const imageUrls = [
+            'https://i.ibb.co/1YGG8tWx/a9aeb686-3a27-4da5-b6ce-7b05453405e1.jpg', 
+            'https://i.ibb.co/mr7g6JR5/6d82e073-9e37-4b16-9c58-d3be792db694.jpg', 
+            'https://i.ibb.co/k6stcKcC/c2e86765-4318-40ac-98ca-015736917d50.jpg', 
+            'https://i.ibb.co/21D21sHn/8e973596-e139-4c79-ae72-49db3529096c.jpg', 
+            'https://i.ibb.co/0jpzkg9M/8ef4e320-8a69-4184-bddb-cbcbf3d8d047.jpg', 
+            'https://i.ibb.co/5bfD29X/eff3c44e-948b-48d7-b08f-9156ccc7dc86.jpg',
+            'https://i.ibb.co/MyW1DKb6/b4c43851-b592-4bde-b46b-3d30f3cff753.jpg',
+            'https://i.ibb.co/4Rn1YYhw/c55ef964-2fdb-4c8f-ba70-85f4ee2bd93f.jpg',
+            'https://i.ibb.co/B5ztXCqV/IMG-7553.jpg'
+        ];
+
+        // Shuffle images array (Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        shuffleArray(imageUrls);
+
+        const minY = window.innerHeight;
+        let floatingImages = [];
+
+        function randomBetween(a, b) {
+            return Math.random() * (b - a) + a;
+        }
+
+        function createFloatingImage(y) {
+            const imgSize = 200;
+            let left, top, tries = 0, maxTries = 40, collision;
+            do {
+                left = randomBetween(0, window.innerWidth - imgSize);
+                top = y;
+                collision = false;
+                for (const obj of floatingImages) {
+                    // Use current animated position for better accuracy
+                    const otherLeft = parseFloat(obj.el.style.left);
+                    const otherTop = obj.y;
+                    // Check bounding box overlap
+                    if (
+                        left < otherLeft + imgSize * 0.95 &&
+                        left + imgSize * 0.95 > otherLeft &&
+                        top < otherTop + imgSize * 0.95 &&
+                        top + imgSize * 0.95 > otherTop
+                    ) {
+                        collision = true;
+                        break;
+                    }
+                }
+                tries++;
+            } while (collision && tries < maxTries);
+            const img = document.createElement('img');
+            img.src = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+            img.className = 'floating-img';
+            img.style.left = left + 'px';
+            img.style.top = top + 'px';
+            img.style.opacity = 1;
+            document.body.appendChild(img);
+            const speed = randomBetween(0.7, 1.8); // slightly faster
+            floatingImages.push({el: img, y: top, speed: speed});
+        }
+
+        function addInitialImages() {
+            for (let i = 0; i < 10; i++) {
+                // Appear at random vertical positions in the visible window and below
+                createFloatingImage(randomBetween(minY * 0.5, minY + window.innerHeight));
+            }
+        }
+
+        function animateImages() {
+            for (let i = floatingImages.length - 1; i >= 0; i--) {
+                const obj = floatingImages[i];
+                obj.y -= obj.speed;
+                obj.el.style.transform = `translateY(${obj.y - parseFloat(obj.el.style.top)}px)`;
+                if (obj.y < -100) {
+                    obj.el.style.opacity = 0;
+                    setTimeout(() => obj.el.remove(), 500);
+                    floatingImages.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(animateImages);
+        }
+
+        // Limit the total number of floating images
+        const MAX_FLOATING_IMAGES = 30;
+        let imagesAddedOnScroll = false;
+        function addImagesOnScroll() {
+            // Add more images as user scrolls down, but only once
+            const scrollY = window.scrollY;
+            const windowH = window.innerHeight;
+            if (
+                scrollY + windowH > document.body.scrollHeight - 200 &&
+                !imagesAddedOnScroll &&
+                floatingImages.length < MAX_FLOATING_IMAGES
+            ) {
+                for (let i = 0; i < 5; i++) {
+                    if (floatingImages.length < MAX_FLOATING_IMAGES) {
+                        createFloatingImage(scrollY + randomBetween(0, windowH));
+                    }
+                }
+                imagesAddedOnScroll = true;
+            }
+            // Reset flag if user scrolls up
+            if (scrollY + windowH < document.body.scrollHeight - 400) {
+                imagesAddedOnScroll = false;
+            }
+        }
+
+        // Show the button when scrolled to bottom
+        const unwrapBtn = document.getElementById('unwrapBtn');
+        function checkShowButton() {
+            const scrollY = window.scrollY;
+            const windowH = window.innerHeight;
+            const docH = document.body.scrollHeight;
+            if (scrollY + windowH >= docH - 10) {
+                unwrapBtn.style.display = 'block';
+            } else {
+                unwrapBtn.style.display = 'none';
+            }
+        }
+
+        unwrapBtn.addEventListener('click', function() {
+            let password = prompt('Enter the password to unwrap your present!');
+            if (password === null) return;
+            if (password === 'Je123456') {
+                window.location.href = '20for20.html';
+            } else {
+                alert('Hint: Netflix Password');
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            addImagesOnScroll();
+            checkShowButton();
+        });
+        window.addEventListener('resize', () => {
+            // Optionally, adjust images on resize
+            checkShowButton();
+        });
+
+        addInitialImages();
+        animateImages();
+        checkShowButton();
+    </script>
+</body>
+</html>

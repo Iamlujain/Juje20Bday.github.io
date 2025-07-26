@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Message to Future Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #2d0036 0%, #4b006e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    h1 {
+      color: #fff;
+      font-size: 2.7rem;
+      margin-top: 60px;
+      margin-bottom: 18px;
+      text-shadow:
+        0 0 20px #fff,
+        0 0 40px #a259ff,
+        0 0 60px #a259ff,
+        0 0 80px #fff;
+      letter-spacing: 0.08em;
+      font-family: 'Raleway', sans-serif;
+    }
+    p {
+      color: #e5cbff;
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+      font-family: 'Raleway', sans-serif;
+      text-shadow: none;
+    }
+    textarea {
+      width: 90vw;
+      max-width: 600px;
+      height: 180px;
+      padding: 18px 16px;
+      margin-top: 18px;
+      font-size: 1.1rem;
+      border-radius: 18px;
+      border: none;
+      background: #fff8;
+      color: #2d0036;
+      box-shadow: 0 2px 16px #a259ff33, 0 1px 4px #fff4;
+      outline: none;
+      font-family: 'Raleway', sans-serif;
+      resize: vertical;
+      transition: box-shadow 0.2s;
+      text-shadow: none;
+    }
+    textarea:focus {
+      box-shadow: 0 4px 32px #a259ff66, 0 2px 8px #fff8;
+      background: #fff;
+      text-shadow: none;
+    }
+    button {
+      margin-top: 24px;
+      padding: 14px 38px;
+      font-size: 1.2rem;
+      font-family: 'Raleway', sans-serif;
+      background: linear-gradient(90deg, #a259ff 0%, #4b006e 100%);
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      box-shadow: 0 4px 24px #a259ff44, 0 2px 8px #fff8;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-shadow: none;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #fff 0%, #a259ff 100%);
+      color: #4b006e;
+      box-shadow: 0 6px 40px #fff8, 0 2px 8px #a259ff88;
+      transform: scale(1.04);
+      text-shadow: none;
+    }
+    #savedMessage {
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+      margin-top: 32px;
+      max-width: 600px;
+      color: #e5cbff;
+      font-size: 1.15rem;
+      word-break: break-word;
+      font-family: 'Raleway', sans-serif;
+      text-align: center;
+    }
+    #savedMessage h2 {
+      display: none;
+    }
+    .hidden {
+      display: none;
+    }
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 1.5rem;
+        margin-top: 32px;
+      }
+      textarea {
+        font-size: 1rem;
+        padding: 12px 8px;
+        height: 120px;
+      }
+      #savedMessage {
+        padding: 18px 6px 14px 6px;
+        font-size: 1rem;
+      }
+      button {
+        font-size: 1rem;
+        padding: 10px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dear Future Me...</h1>
+  <p>Write a message to yourself for the next birthday. It'll be here waiting you. </p>
+
+  <textarea id="messageInput"></textarea>
+  <br>
+  <button onclick="saveMessage()">Save Message</button>
+
+  <div id="savedMessage" class="hidden">
+    <p id="messageText"></p>
+    <button id="editBtn" style="margin-top:18px;">Change Message</button>
+  </div>
+
+  <script>
+    const messageInput = document.getElementById("messageInput");
+    const savedMessage = document.getElementById("savedMessage");
+    const messageText = document.getElementById("messageText");
+
+    function saveMessage() {
+      const message = messageInput.value.trim();
+      if (message) {
+        localStorage.setItem("futureMessage", message);
+        showSavedMessage();
+      }
+    }
+
+    function showSavedMessage() {
+      const message = localStorage.getItem("futureMessage");
+      if (message) {
+        const now = new Date();
+        const unlockDate = new Date(2026, 6, 27); // July is month 6 (0-based)
+        const editBtn = document.getElementById('editBtn');
+        editBtn.style.display = '';
+        editBtn.onclick = function() {
+          messageInput.style.display = '';
+          messageInput.value = message;
+          savedMessage.classList.add('hidden');
+          document.querySelector('button[onclick="saveMessage()"]')?.style.setProperty('display', '');
+          messageInput.focus();
+        };
+        if (now >= unlockDate) {
+          // Show the actual saved message
+          messageText.textContent = message;
+        } else {
+          // Show lock message
+          messageText.textContent = "Your message will be available on July 27, 2026. Come back then! <3";
+        }
+        savedMessage.classList.remove("hidden");
+        messageInput.style.display = "none";
+        document.querySelector('button[onclick="saveMessage()"]')?.style.setProperty('display', 'none');
+      }
+    }
+
+    function clearMessage() {
+      localStorage.removeItem("futureMessage");
+      location.reload(); // restart the page fresh
+    }
+
+    // Show saved message if it exists
+    window.onload = showSavedMessage;
+  </script>
+
+</body>
+</html>

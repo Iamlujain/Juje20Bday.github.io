@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 for 20</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Raleway:wght@500;700&display=swap" rel="stylesheet">
+    <style> 
+      body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #2d0036 0%, #4b006e 100%);
+            overflow-x: hidden;
+        }
+         .title {
+            font-family: 'Raleway', sans-serif;
+            color: #fff;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            text-shadow:
+                0 0 20px #fff,
+                0 0 40px #a259ff,
+                0 0 60px #a259ff,
+                0 0 80px #fff;
+            letter-spacing: 0.1em;
+                }
+        h3 {
+            font-family: 'Raleway', sans-serif;
+            color: #fff;
+            text-align: center;
+            font-size: 1.7rem;
+            margin-top: 0;
+            margin-bottom: 32px;
+            letter-spacing: 0.08em;
+        }
+        .envelope-grid {
+            display: flex;
+            flex-wrap: wrap;
+               justify-content: center;
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            padding: 0 10px;
+        }
+        .envelope {
+            width: 120px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+               justify-content: center;
+            user-select: none;
+            background: none;
+        }
+        .envelope img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 8px 32px #0006) drop-shadow(0 2px 8px #a259ff88);
+            transition: filter 0.2s;
+                 }
+        .envelope span {
+            position: absolute;
+            top: 36%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Raleway', sans-serif;
+            font-size: 2rem;
+            color: #a259ff;
+            z-index: 2;
+            pointer-events: none;
+            text-shadow:
+                0 0 10px #a259ff,
+                       0 0 20px #fff,
+                0 0 8px #a259ff88;
+        }
+        .envelope:hover, .envelope.active {
+            transform: translateY(-18px) scale(1.08);
+            z-index: 2;
+        }
+        /* Mobile styles */
+        @media (max-width: 700px) {
+            .envelope {
+                width: 80px;
+                height: 60px;
+                    }
+            .envelope span {
+                font-size: 1.2rem;
+                top: 36%;
+            }
+            .envelope-grid {
+                gap: 14px;
+            }
+            .title {
+                font-size: 1.5rem;
+                margin-top: 20px;
+                margin-bottom: 18px;
+            }
+                 h3 {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
+            }
+        }
+.sparkles {
+    margin-top: 0;
+    margin-bottom: 28px;
+    letter-spacing: 0.08em;
+    text-shadow: 
+        0 0 8px #ffffffaa,
+        0 0 12px #e7d6ff;
+}
+
+
+.envelope-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    padding: 0 10px;
+}
+
+.envelope {
+    width: 120px;
+    height: 90px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    background: none;
+}
+
+.envelope img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 6px 18px #8c7bc3aa) drop-shadow(0 2px 6px #fff4);
+    transition: filter 0.2s ease;
+}
+
+.envelope span {
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Raleway', cursive, sans-serif;
+    font-size: 2rem;
+    color: #a168e3;
+    z-index: 2;
+    pointer-events: none;
+    text-shadow:
+        0 0 8px #fff,
+        0 0 12px #d5bfff;
+}
+
+.envelope:hover, .envelope.active {
+    transform: translateY(-12px) scale(1.06);
+    z-index: 2;
+}
+
+
+
+@media (max-width: 700px) {
+    .envelope {
+        width: 80px;
+        height: 60px;
+    }
+    .envelope span {
+        font-size: 1.2rem;
+        top: 36%;
+    }
+    .envelope-grid {
+        gap: 14px;
+    }
+    .title {
+        font-size: 1.6rem;
+        margin-top: 24px;
+    }
+    h3 {
+        font-size: 1.1rem;
+        margin-bottom: 18px;
+    }
+}
+
+
+
+.sparkles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #fff 60%, #e0c4ff 100%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 24px 10px #fff8,
+    0 0 40px 20px #e0c4ff66,
+    0 0 8px 2px #fff8;
+  animation: float 10s infinite ease-in-out;
+  opacity: 0;
+  filter: blur(0.5px) brightness(1.2);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.3);
+    opacity: 0;
+  }
+}
+.sparkle:nth-child(1) { left: 8%; animation-delay: 0s; }
+.sparkle:nth-child(2) { left: 22%; animation-delay: 2s; }
+.sparkle:nth-child(3) { left: 35%; animation-delay: 4s; }
+.sparkle:nth-child(4) { left: 48%; animation-delay: 1s; }
+.sparkle:nth-child(5) { left: 60%; animation-delay: 3s; }
+.sparkle:nth-child(6) { left: 72%; animation-delay: 5s; }
+.sparkle:nth-child(7) { left: 80%; animation-delay: 6s; }
+.sparkle:nth-child(8) { left: 90%; animation-delay: 7s; }
+.sparkle:nth-child(9) { left: 15%; animation-delay: 8s; }
+.sparkle:nth-child(10) { left: 55%; animation-delay: 9s; }
+
+</style>
+</head>
+<body>
+    <div class="title">20 For 20</div>
+    <h3>20 reasons I appreciate you</h3>
+    <div class="envelope-grid">
+        <!-- Envelopes will be generated by JS -->
+    </div>
+    <div class="sparkles">
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+    </div>
+    <button id="final-surprise-btn" style="display:none;position:fixed;left:50%;bottom:48px;transform:translateX(-50%);padding:16px 44px;font-size:1.2rem;font-family:'Raleway',sans-serif;background:#fff;color:#4b006e;border:1.5px solid #a259ff;border-radius:32px;box-shadow:none;cursor:pointer;z-index:10001;letter-spacing:0.08em;transition:background 0.18s,color 0.18s,border 0.18s,transform 0.13s;">Final Surprise!</button>
+    <script>
+        // Generate 20 envelopes
+        const grid = document.querySelector('.envelope-grid');
+        for (let i = 1; i <= 20; i++) {
+            const env = document.createElement('div');
+            env.className = 'envelope';
+            env.innerHTML = `<img src="https://i.ibb.co/KjNt6LpD/image-2025-07-26-212714778-removebg-preview.png" alt="Envelope"><span>${i}</span>`;
+            grid.appendChild(env);
+        }
+
+        // Pop up on hover (desktop) or tap (mobile)
+        function isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        }
+        const envelopes = document.querySelectorAll('.envelope');
+        if (isTouchDevice()) {
+            envelopes.forEach(env => {
+                env.addEventListener('touchstart', function() {
+                    envelopes.forEach(e => e.classList.remove('active'));
+                    this.classList.add('active');
+                });
+                env.addEventListener('touchend', function() {
+                    setTimeout(() => this.classList.remove('active'), 600);
+                });
+            });
+        }
+        // Prepare for modules: handle click
+        envelopes.forEach((env, idx) => {
+            env.addEventListener('click', function() {
+                let message = '';
+                if (idx === 0) {
+                    message = '1. The summer we spent watching Daredevil and Intersteller together, most fun quality time I\'ve had with you <3';
+                } else if (idx === 1) {
+                    message = '2. The infinite times we have ranted to each other about our lives, and you listened, comforted me, and trusted me with your rants just as much <3';
+                } else if (idx === 2) {
+                    message = '3. All the times we went out together. My only friend I can depend on to make girls night outs fun and something to get home from feeling born again <3';
+                } else if (idx === 3) {
+                    message = '4. Seeing you glow in your family events, making me proud to call you my ride-or-die, my best friend. And how you always make me feel like I\'m part of your family too <3';
+                } else if (idx === 4) { 
+                    message = '5. How I don\'t think twice before returning to you for advice, opinion, or just to show you something I liked and am excited about, knowing you\'d hype me up and make me feel good about it <3';
+                } else if (idx === 5) {
+                    message = '6. 8th grade with you, out of all my education years, I think was the most special with you. 13-years-old me would have nevevr imagined the life we will be sharing after all the times we escaped class to collect attendance from other classrooms, together <3';
+                } else if (idx === 6) {
+                    message = '7. Your support when mom was pregnant and difficult, distracting me and reminding me why I have a reason to push on. It was always you <3';
+                } else if (idx === 7) {
+                    message = '8. How you stuck with me after all the times I was a jerk, when I closed my phone and locked out, you kept trying to reach me, only one who cared and worried about me enough to keep presisting I pick up <3';
+                } else if (idx === 8) {
+                    message = '9. The ephoruia we felt every time our plans worked out and we finally hug \'hello\' and finally execute our silly hangout ideas, as simple as colouring books and chatting and gossibing <3';
+                } else if (idx === 9) {
+                    message = '10. The nights we spent playing Among Us, with Farah or alone, just us two, killing each other and taking revenge all in good banter <3';
+                }
+                else if (idx === 10) {
+                    message = '11. Every time you made me feel loved and cared for, when you think of me whenever you find something I\'d like or find good use of <3 ';
+                } else if (idx === 11) {
+                    message = '12. When I get a peak at your resilience, patience, and strength to keep going no matter how bad shit is going for you <3';
+                } else if (idx === 12) {
+                    message = '13. Every time I get to see your creativity, how you put so much effort in everything you touch. The translations, the letters you write me on my birthdays...all of it <3';
+                } else if (idx === 13) {
+                    message = '14. <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2JzZzZUQj3Qff7wapcbKjc?utm_source=generator&theme=0" width="80%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> <3';
+                } else if (idx === 14) {
+                    message = '15. The way I see our future expand forever. Forever my best friend, forever the girl I love and take pride in knowing, my comfort and safe place, my beautiful hot girly, who will be my prettiest maid of honour, official aunt of my kids, and the one I will always be grateful for having <3'
+                } else if (idx === 15) {
+                    message = '16. Our little inside jokes and rituals you created for us, like the reels we send each other knowing no one else would get it like we do, the snapchat streaks we keep alive where you scold me for losing <3';
+                } else if (idx === 16) {
+                    message = '17. The way you made yourself a part of my family, everyone knows you and knows how inseparable we are. Jamila, Lujain\'s bestie, the half of our pairing, where we both complete each other completely and fully <3';
+                } else if (idx === 17) {
+                    message = '18. Every time I saw your passion flair up, how you get so excited about the things you love, and how you always share that with me, making me feel like I\'m part of your world <3';
+                } else if (idx === 18) {
+                    message = '19. Always being my eye to the world, holder of my hand and number one supporter I never fear burdening with my issues, as if I duplicated myself completely <3';
+                } else if (idx === 19)
+    {
+                        message = '20. The fact that you are my best friend, and I can always count on you to be there for me, no matter what. You are the sister I never had, and I love you more than words can say\n\n Happy Birthday, Jamool <3';
+                    }
+                else {
+                    message = `Envelope ${idx+1}`;
+                }
+                showPopup(message, env);
+            });
+        });
+
+        // Popup function with X button and envelope fade
+        function showPopup(message, envelopeElem) {
+            let overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = 0;
+            overlay.style.left = 0;
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.background = 'rgba(45,0,54,0.45)';
+            overlay.style.zIndex = 9998;
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.addEventListener('click', closePopup);
+
+            let popup = document.createElement('div');
+            popup.style.background = '#fff';
+            popup.style.color = '#2d0036';
+            popup.style.fontFamily = "Raleway, sans-serif";
+            popup.style.fontSize = '2rem';
+            popup.style.padding = '40px 32px';
+            popup.style.borderRadius = '24px';
+            popup.style.boxShadow = 'none';
+            popup.style.textAlign = 'center';
+            popup.style.letterSpacing = '0.05em';
+            popup.style.maxWidth = '80vw';
+            popup.style.maxHeight = '80vh';
+            popup.style.overflowY = 'auto';
+            popup.style.wordBreak = 'break-word';
+            popup.style.cursor = 'pointer';
+            popup.title = 'Click the X or anywhere outside to close';
+            // Prevent overlay click from closing when clicking inside popup
+            popup.addEventListener('click', e => e.stopPropagation());
+
+            // X button
+            let closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '&times;';
+            closeBtn.style.position = 'absolute';
+            closeBtn.style.top = '18px';
+            closeBtn.style.right = '28px';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.fontSize = '2.2rem';
+            closeBtn.style.color = '#a259ff';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.fontFamily = 'Raleway, sans-serif';
+            closeBtn.style.zIndex = 10000;
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closePopup();
+            });
+
+            // Message content
+
+            let msgDiv = document.createElement('div');
+            // If message contains an iframe, use innerHTML, else innerText
+            if (message.includes('<iframe')) {
+                msgDiv.innerHTML = message;
+            } else {
+                msgDiv.innerText = message;
+            }
+
+            popup.appendChild(closeBtn);
+            popup.appendChild(msgDiv);
+            popup.style.position = 'relative';
+
+            overlay.appendChild(popup);
+            document.body.appendChild(overlay);
+
+            function closePopup() {
+                overlay.remove();
+                if (envelopeElem) {
+                    envelopeElem.style.opacity = '0.4';
+                }
+                // Check if all envelopes are faded (opacity 0.4)
+                const allFaded = Array.from(document.querySelectorAll('.envelope')).every(e => e.style.opacity === '0.4');
+                if (allFaded) {
+                    document.getElementById('final-surprise-btn').style.display = 'block';
+                }
+            }
+        }
+        // Add hover effect for the button
+        const finalBtn = document.getElementById('final-surprise-btn');
+        finalBtn.addEventListener('mouseenter', function() {
+            finalBtn.style.background = '#f3eaff';
+            finalBtn.style.color = '#a259ff';
+            finalBtn.style.border = '1.5px solid #a259ff';
+            finalBtn.style.transform = 'translateX(-50%) scale(1.04)';
+        });
+        finalBtn.addEventListener('mouseleave', function() {
+            finalBtn.style.background = '#fff';
+            finalBtn.style.color = '#4b006e';
+            finalBtn.style.border = '1.5px solid #a259ff';
+            finalBtn.style.transform = 'translateX(-50%) scale(1)';
+        });
+        // Redirect on final surprise button click
+        finalBtn.addEventListener('click', function() {
+            window.location.href = 'future-me.html';
+        });
+    </script>
+</body>
+</html>
