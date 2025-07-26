@@ -152,7 +152,7 @@
       const message = localStorage.getItem("futureMessage");
       if (message) {
         const now = new Date();
-        const unlockDate = new Date(2026, 6, 27); // July is month 6 (0-based)
+        const unlockDate = new Date(2026, 6, 27); 
         const editBtn = document.getElementById('editBtn');
         editBtn.style.display = '';
         editBtn.onclick = function() {
@@ -163,10 +163,10 @@
           messageInput.focus();
         };
         if (now >= unlockDate) {
-          // Show the actual saved message
+         
           messageText.textContent = message;
         } else {
-          // Show lock message
+         
           messageText.textContent = "Your message will be available on July 27, 2026. Come back then! <3";
         }
         savedMessage.classList.remove("hidden");
@@ -177,10 +177,8 @@
 
     function clearMessage() {
       localStorage.removeItem("futureMessage");
-      location.reload(); // restart the page fresh
+      location.reload(); 
     }
-
-    // Show saved message if it exists
     window.onload = showSavedMessage;
   </script>
 
